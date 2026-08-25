@@ -55,7 +55,7 @@ $animais = mysqli_query($conexao, "SELECT * FROM animais");
                                 <td><?php echo $animal["nome"] ?></td>
                                 <td><?php echo $animal["raca"] ?></td>
                                 <td><?php echo $animal["idade"] ?></td>
-                                <td><?php echo ucfirst(str_replace('_', ' ', $prato["categoria"])) ?></td>
+                                <td><?php echo ucfirst(str_replace('_', ' ', $animal["raca"])) ?></td>
                                 <td class="acoes">
                                     <a href="public/editar.php?id=<?php echo $animal["id"] ?>" class="btn-editar">Editar</a>
                                     <a href="public/excluir.php?id=<?php echo $animal["id"] ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
@@ -65,7 +65,7 @@ $animais = mysqli_query($conexao, "SELECT * FROM animais");
                     </tbody>
                 </table>
             <?php } else { ?>
-                <p class="vazio">Nenhum animal cadastrado ainda. Clique em "Cadastrar Animal" para começar! </p>
+                <p class="vazio">Nenhum animal cadastrado ainda.</p>
             <?php } ?>
         </section>
  
