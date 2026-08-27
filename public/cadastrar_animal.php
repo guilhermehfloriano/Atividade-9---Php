@@ -1,6 +1,4 @@
 <?php
-session_start();
-var_dump($_SESSION);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include "../infra/conexao.php";
@@ -10,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $especie = mysqli_real_escape_string($conexao, $_POST["especie"]);
     $peso = mysqli_real_escape_string($conexao, $_POST["peso"]);
     $idade = mysqli_real_escape_string($conexao, $_POST["idade"]);
-    $usuario_id = $_SESSION['id'];
+    $usuario_id = mysqli_real_escape_string($conexao, $_POST["usuario_id"]);
 
-    if (empty($nome) || empty($raca) || empty($especie) || empty($peso) || empty($idade)) {
+    if (empty($nome) || empty($raca) || empty($especie) || empty($peso) || empty($idade) || empty($usuario_id)) {
         $erro = "Todos os campos são obrigatórios!";
     } else if ($idade <= 0) {
         $erro = "A idade deve ser maior que zero!";
@@ -26,7 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $erro = "Erro ao cadastrar animal: " . mysqli_error($conexao);
         }
     }
+} else {
+    include "../infra/conexao.php";
 }
+
+$usuarios = mysqli_query($conexao, "SELECT id, nome FROM usuarios");
 
 ?>
 

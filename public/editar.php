@@ -3,23 +3,24 @@
 
 include "../infra/conexao.php";
 
-$id = $_GET["id"];
+$id = intval($_GET["id"]);
 $animal = mysqli_query($conexao, "SELECT * FROM animais WHERE id = $id");
 $animal_dados = mysqli_fetch_assoc($animal);
 
-$usuariosResult = mysqli_query($conexao, "SELECT id, nomeUsuario FROM usuarios ORDER BY nomeUsuario");
+$usuariosResult = mysqli_query($conexao, "SELECT id, nome FROM usuarios ORDER BY nome");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
     $raca = mysqli_real_escape_string($conexao, $_POST["raca"]);
     $idade = mysqli_real_escape_string($conexao, $_POST["idade"]);
+    $usuario_id = mysqli_real_escape_string($conexao, $_POST["usuario_id"]);
 
-    if (empty($nome) || empty($raca) || empty($idade)) {
+    if (empty($nome) || empty($raca) || empty($idade) || empty($usuario_id)) {
         $erro = "Todos os campos são obrigatórios!";
     } else if ($idade <= 0) {
         $erro = "A idade deve ser maior que zero!";
     } else {
-        $sql = "UPDATE animais SET nome='$nome', raca='$raca', idade='$idade' WHERE id=$id";
+        $sql = "UPDATE animais SET nome='$nome', raca='$raca', idade='$idade', usuario_id='$usuario_id' WHERE id=$id";
 
         if (mysqli_query($conexao, $sql)) {
             $sucesso = "Animal atualizado com sucesso!";
