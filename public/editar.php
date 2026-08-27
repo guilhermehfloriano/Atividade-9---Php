@@ -12,15 +12,18 @@ $usuariosResult = mysqli_query($conexao, "SELECT id, nome FROM usuarios ORDER BY
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
     $raca = mysqli_real_escape_string($conexao, $_POST["raca"]);
+    $especie = mysqli_real_escape_string($conexao, $_POST["especie"]);
+    $peso = mysqli_real_escape_string($conexao, $_POST["peso"]);
     $idade = mysqli_real_escape_string($conexao, $_POST["idade"]);
+
     $usuario_id = mysqli_real_escape_string($conexao, $_POST["usuario_id"]);
 
-    if (empty($nome) || empty($raca) || empty($idade) || empty($usuario_id)) {
+    if (empty($nome) || empty($raca) || empty($especie) || empty($peso) || empty($idade) || empty($usuario_id)) {
         $erro = "Todos os campos são obrigatórios!";
     } else if ($idade <= 0) {
         $erro = "A idade deve ser maior que zero!";
     } else {
-        $sql = "UPDATE animais SET nome='$nome', raca='$raca', idade='$idade', usuario_id='$usuario_id' WHERE id=$id";
+        $sql = "UPDATE animais SET nome='$nome', raca='$raca', especie='$especie', peso='$peso', idade='$idade', usuario_id='$usuario_id' WHERE id=$id";
 
         if (mysqli_query($conexao, $sql)) {
             $sucesso = "Animal atualizado com sucesso!";

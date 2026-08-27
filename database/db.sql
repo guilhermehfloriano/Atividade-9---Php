@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS Atividade_2;
-USE Atividade_2;
+CREATE DATABASE Atividade_9;
+USE Atividade_9;
 CREATE TABLE usuarios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(150) NOT NULL,

@@ -9,7 +9,7 @@ $especie = mysqli_real_escape_string($conexao, $_POST["especie"]);
 $peso = mysqli_real_escape_string($conexao, $_POST["peso"]);
 $idade = mysqli_real_escape_string($conexao, $_POST["idade"]);
 
-$sql = "UPDATE animais SET nome='$nome',raca='$raca',idade='$idade' WHERE id = '$id'";
+$sql = "UPDATE animais SET nome='$nome',raca='$raca',especie='$especie',peso='$peso',idade='$idade' WHERE id = '$id'";
 
 mysqli_query($conexao, $sql);
 header("Location: ../index.php");
