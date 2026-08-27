@@ -16,8 +16,6 @@ CREATE TABLE animais (
     peso DECIMAL(5, 2) NOT NULL,
     usuario_id INT NOT NULL,
 
-    id_cliente INT,
-
-    FOREIGN KEY (id_cliente) REFERENCES usuarios(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
 
 );

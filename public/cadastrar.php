@@ -5,8 +5,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
     $email = mysqli_real_escape_string($conexao, $_POST["email"]);
+    $telefone = mysqli_real_escape_string($conexao, $_POST["telefone"]);
 
-    if (empty($nome) || empty($email) || empty($_POST["telefone"])) {
+    if (empty($nome) || empty($email) || empty($telefone)) {
         $erro = "Todos os campos são obrigatórios!";
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = "Email inválido!";
@@ -88,6 +89,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         value="<?php echo isset($_POST['emailUsuario']) ? htmlspecialchars($_POST['emailUsuario']) : '' ?>"
                     >
                 </div>
+
+                <div class="grupo-form">
+                    <label for="telefoneUsuario">Telefone:</label>
+                    <input 
+                        type="text" 
+                        id="telefoneUsuario"
+                        name="telefoneUsuario" 
+                        placeholder="(XX) XXXXX-XXXX"
+                        required
+                        value="<?php echo isset($_POST['telefoneUsuario']) ? htmlspecialchars($_POST['telefoneUsuario']) : '' ?>"
+                    >
 
 
                 <div class="grupo-botoes">
