@@ -27,10 +27,10 @@ $animais = mysqli_query($conexao, "SELECT * FROM animais");
             <h2>O que você deseja fazer?</h2>
             <div class="container-botoes">
                 <a href="public/cadastrar.php" class="btn btn-usuario">
-                    Cadastrar Usuário
+                   <button onclick="window.location.href='public/cadastrar.php'">Cadastrar Usuário</button>
                 </a>
                 <a href="public/cadastrar_animal.php" class="btn btn-animal">
-                    Cadastrar animal
+                    <button onclick="window.location.href='public/cadastrar_animal.php'">Cadastrar Animal</button>
                 </a>
             </div>
         </section>

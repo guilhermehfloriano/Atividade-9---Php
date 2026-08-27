@@ -7,15 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
     $raca = mysqli_real_escape_string($conexao, $_POST["raca"]);
+    $especie = mysqli_real_escape_string($conexao, $_POST["especie"]);
+    $peso = mysqli_real_escape_string($conexao, $_POST["peso"]);
     $idade = mysqli_real_escape_string($conexao, $_POST["idade"]);
     $usuario_id = $_SESSION['id'];
 
-    if (empty($nome) || empty($raca) || empty($idade)) {
+    if (empty($nome) || empty($raca) || empty($especie) || empty($peso) || empty($idade)) {
         $erro = "Todos os campos são obrigatórios!";
     } else if ($idade <= 0) {
         $erro = "A idade deve ser maior que zero!";
     } else {
-        $sql = "INSERT INTO animais (nome, raca, idade, usuario_id) VALUES ('$nome', '$raca', '$idade', '$usuario_id')";
+        $sql = "INSERT INTO animais (nome, raca, especie, peso, idade, usuario_id) VALUES ('$nome', '$raca', '$especie', '$peso', '$idade', '$usuario_id')";
 
         if (mysqli_query($conexao, $sql)) {
             $sucesso = "Animal cadastrado com sucesso!";
@@ -46,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main>
         <section class="formulario-container">
             <div class="voltar">
-                <a href="../index.php">← Voltar</a>
+                <button onclick="window.location.href='../index.php'">←Voltar</button>
             </div>
 
             <h2> Adicionar Novo Animal</h2>
@@ -104,13 +106,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     >
                 </div>
 
+                <div class="grupo-form">
+                    <label for="peso">Peso:</label>
+                    <input 
+                        type="number" 
+                        id="peso"
+                        name="peso" 
+                        step="0.01"
+                        min="0"
+                        placeholder="0.00"
+                        required
+                        value="<?php echo isset($_POST['peso']) ? htmlspecialchars($_POST['peso']) : '' ?>"
+                    >
+                </div>
+
+                <div class="grupo-form">
+                    <label for="especie">Espécie:</label>
+                    <input 
+                        type="text" 
+                        id="especie"
+                        name="especie" 
+                        placeholder="Ex: Cachorro"
+                        required
+                        value="<?php echo isset($_POST['especie']) ? htmlspecialchars($_POST['especie']) : '' ?>"
+                    >
+                </div>
+
                 <div class="grupo-botoes">
                     <button type="submit" class="btn btn-sucesso">
                          Cadastrar Animal
                     </button>
-                    <a href="../index.php" class="btn btn-cancelar">
+                    <button onclick="window.location.href='../index.php'">
                          Cancelar
-                    </a>
+                    </button>
                 </div>
             </form>
         </section>

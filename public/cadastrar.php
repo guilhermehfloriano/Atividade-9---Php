@@ -3,15 +3,15 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include "../infra/conexao.php";
 
-    $nome = mysqli_real_escape_string($conexao, $_POST["nomeUsuario"]);
-    $email = mysqli_real_escape_string($conexao, $_POST["emailUsuario"]);
-    
-    if (empty($nome) || empty($email) || empty($senha)) {
+    $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
+    $email = mysqli_real_escape_string($conexao, $_POST["email"]);
+
+    if (empty($nome) || empty($email) || empty($_POST["telefone"])) {
         $erro = "Todos os campos são obrigatórios!";
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = "Email inválido!";
     } else {
-        $sql = "INSERT INTO usuarios (nomeUsuario, email, senha) VALUES ('$nome', '$email', '$senha')";
+        $sql = "INSERT INTO usuarios (nome, email, telefone) VALUES ('$nome', '$email', '$telefone')";
 
         if (mysqli_query($conexao, $sql)) {
             $sucesso = "Usuário cadastrado com sucesso!";
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main>
         <section class="formulario-container">
             <div class="voltar">
-                <a href="../index.php">← Voltar</a>
+                <button onclick="window.location.href='../index.php'">←Voltar</button>
             </div>
 
             <h2> Cadastrar Novo Usuário</h2>
