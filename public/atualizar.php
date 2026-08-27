@@ -2,12 +2,12 @@
 
 include "../infra/conexao.php";
 
-$id = $_POST["id"];
-$nome = $_POST["nome"];
-$raca = $_POST["raca"];
-$especie = $_POST["especie"];
-$peso = $_POST["peso"];
-$idade = $_POST["idade"];
+$id = intval($_POST["id"]);
+$nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
+$raca = mysqli_real_escape_string($conexao, $_POST["raca"]);
+$especie = mysqli_real_escape_string($conexao, $_POST["especie"]);
+$peso = mysqli_real_escape_string($conexao, $_POST["peso"]);
+$idade = mysqli_real_escape_string($conexao, $_POST["idade"]);
 
 $sql = "UPDATE animais SET nome='$nome',raca='$raca',idade='$idade' WHERE id = '$id'";
 
